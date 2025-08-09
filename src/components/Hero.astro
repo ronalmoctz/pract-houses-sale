@@ -1,0 +1,31 @@
+---
+import { Image } from "astro:assets";
+import HauseHero from "../assets/house-1.jpg";
+import ArrowUpRight from "../assets/arrow-up-right.svg";
+---
+
+<section id="hero" class="relative min-h-dvh w-full overflow-hidden">
+  <Image
+    src={HauseHero}
+    alt="Casa Moon"
+    class="absolute inset-0 w-full object-cover object-center block z-0"
+  />
+  <div class="container-default text-gray-100">
+    <h1 class="absolute top-[8%] left-[8%] font-medium">AMBER</h1>
+    <h1 class="absolute top-[28%] right-[5.45%] font-medium">HOUSE</h1>
+
+    <p class="font-light text-3xl top-[14%] right-[6%]">
+      WE BUILD <br /> MODERN <br /> HOUSES IN <br /> MEXICO
+    </p>
+    <p class="font-medium text-xl top-[50%] left-[40%] text-right">
+      DESING <br /> PROJECT DESING <br /> CONSTRUCTION <br /> FINAL RENOVATION
+    </p>
+    <a
+      class="absolute inline-flex items-center gap-2 text-2xl top-[58.3%] left-[10%]"
+      href="#"
+    >
+      <span class="underline">GET A PRESENTATION</span>
+      <ArrowUpRight />
+    </a>
+  </div>
+</section>

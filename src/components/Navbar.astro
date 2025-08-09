@@ -1,0 +1,65 @@
+---
+import { navLinks, SOCIAL } from "../constants/index";
+---
+
+<nav>
+  <div id="navbar" class="text-gray-100">
+    <a href="#home" class="flex items-center pr-30">
+      <p>MOON HOUSE</p>
+    </a>
+    <ul class="pr-30">
+      {
+        navLinks.map((link) => (
+          <li key={link.id}>
+            <a href={`#${link.id}`}>{link.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="gap-4 pr-30">
+      {
+        SOCIAL.map(({ url, image, name, label }) => (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label ?? name}
+            role="link"
+          >
+            <image.logo />
+          </a>
+        ))
+      }
+    </ul>
+    <div class="text-sm font-semibold whitespace-nowrap">
+      <a href="tel:+521234567890">+52 123 456 7890</a>
+    </div>
+  </div>
+
+  <script>
+    import gsap from "gsap";
+
+    const nav = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+      const triggerPoint = 50;
+
+      if (window.scrollY > triggerPoint) {
+        gsap.to(nav, {
+          backgroundColor: "#00000050",
+          backdropFilter: "blur(10px)",
+          duration: 1,
+          ease: "power1.inOut",
+        });
+      } else {
+        gsap.to(nav, {
+          backgroundColor: "transparent",
+          backdropFilter: "none",
+          duration: 1,
+          ease: "power1.inOut",
+        });
+      }
+    });
+  </script>
+</nav>

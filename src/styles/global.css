@@ -1,0 +1,109 @@
+@import "tailwindcss";
+@import '@fontsource-variable/bricolage-grotesque';
+
+@font-face {
+    font-family: "Neue Kaine";
+    src: url("/font/Neue Kaine Variable.ttf")format("truetype");
+}
+
+@theme {
+    --color-dark: #2f2f2f;
+    --color-white: #ededed;
+    --font-sans: "Bricolage Grotesque Variable", sans-serif;
+    --font-neue-kaine: "Neue Kaine", sans-serif;
+    --font-serif: "DM Serif Text", serif;
+}
+
+html,
+body {
+    width: 100%;
+    background-color: #FFFFFF;
+    color: #2f2f2f;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+@utility flex-center {
+    @apply flex justify-center items-center;
+}
+
+@utility col-center {
+    @apply flex flex-col justify-center items-center;
+}
+
+@utility abs-center {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+
+@layer components {
+    main {
+        @apply w-full overflow-x-hidden;
+    }
+
+    .container-default {
+        @apply container mx-auto px-5 lg:px-0;
+    }
+
+    nav {
+        @apply fixed z-50 w-full transition-all;
+
+        div {
+            @apply flex md:flex-row flex-col md:justify-between items-center gap-5 py-5 lg:px-0 px-5 container mx-auto;
+        }
+
+        p {
+            @apply font-sans text-3xl -mb-2;
+        }
+
+        a {
+            @apply cursor-pointer text-nowrap md:text-base text-sm;
+        }
+
+        ul {
+            @apply flex-center lg:gap-30 gap-7;
+        }
+    }
+
+}
+
+
+#hero {
+    @apply relative z-10 min-h-dvh w-full;
+
+    h1 {
+        @apply md:mt-32 mt-40 text-4xl md:text-[12vw] leading-none font-neue-kaine;
+    }
+
+    .body {
+        @apply container mx-auto absolute left-1/2 -translate-x-1/2 lg:bottom-20 top-auto md:top-[30vh] flex justify-between items-end px-5;
+    }
+
+    p {
+        @apply absolute font-neue-kaine;
+    }
+}
+
+#video {
+    h2 {
+        @apply text-6xl;
+    }
+
+    p {
+        @apply text-3xl;
+    }
+}
+
+#tecnologies {
+    h1 {
+        @apply font-neue-kaine;
+    }
+
+    h4 {
+        @apply font-neue-kaine;
+    }
+
+    p {
+        @apply font-neue-kaine;
+    }
+}

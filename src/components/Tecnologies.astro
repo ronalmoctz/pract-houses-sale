@@ -1,0 +1,46 @@
+---
+import { TECNOLOGIES } from "../constants";
+---
+
+<section id="tecnologies" class="mt-30 flex-center">
+  <div class="container-default">
+    <div class="relative grid place-items-center mb-16">
+      <img
+        src="/images/house-3.jpg"
+        alt="example no se que numero"
+        class="object-cover w-full h-[300px] rounded-4xl col-start-1 row-start-1"
+      />
+      <h1
+        class="text-gray-100 font-medium text-8xl text-center z-10 col-start-1 row-start-1"
+      >
+        TECNOLOGIES
+      </h1>
+    </div>
+
+    <!-- Grid de tecnologías -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {
+        TECNOLOGIES.map(({ title, description, image }, index) => (
+          <div class="relative flex flex-col  items-start text-left px-6 py-8">
+            {index < TECNOLOGIES.length - 1 && (
+              <div class="absolute right-0 top-0 hidden h-full min-h-[1em] w-px self-stretch border-t-0 bg-gradient-to-tr from-transparent via-neutral-800 to-transparent opacity-35 dark:via-neutral-600 lg:block" />
+            )}
+
+            {/* Icono */}
+            <div class="mb-6 justify-start">
+              <image.logo class="size-16" />
+            </div>
+
+            {/* Título */}
+            <h3 class="text-2xl font-semibold mb-4">{title}</h3>
+
+            {/* Descripción */}
+            <p class="text-sm font-semibold text-left text-wrapp leading-relaxed">
+              {description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

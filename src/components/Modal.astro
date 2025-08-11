@@ -1,0 +1,79 @@
+<div
+  id="gallery-modal"
+  class="modal-enter fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+>
+  <div class="relative max-w-[1100px] w-full mx-auto">
+    <!-- Close Button -->
+    <button
+      id="modal-close"
+      class="absolute top-3 right-3 z-10 text-white bg-black/40 hover:bg-black/60 rounded-full p-2 transition-all duration-200"
+      aria-label="Cerrar modal"
+    >
+      <svg
+        class="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <div id="modal-body" class="bg-white rounded-lg shadow-2xl overflow-hidden">
+      <div
+        class="relative bg-black flex items-center justify-center"
+        style="height:70vh;"
+      >
+        <div
+          id="modal-media"
+          class="modal-media w-full h-full flex items-center justify-center"
+        >
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button
+          id="modal-prev"
+          class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-3 transition-all duration-200"
+          aria-label="Imagen anterior"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button
+          id="modal-next"
+          class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-3 transition-all duration-200"
+          aria-label="Siguiente imagen"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div id="modal-caption" class="p-4 text-sm text-gray-600 bg-white"></div>
+    </div>
+  </div>
+</div>

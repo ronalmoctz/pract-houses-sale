@@ -1,0 +1,54 @@
+---
+// src/components/Gallery.astro
+import { PHOTOS, VIDEOS } from "../constants/gallery";
+import TabButton from "./TabButton.astro";
+import MediaGrid from "./Grid.astro";
+import Modal from "./Modal.astro";
+---
+
+<section class="pt-12 container-default bg-gray-200 rounded-3xl">
+  <h2 class="text-8xl text-center mb-20 mt-20 font-neue-kaine font-medium">
+    CASE STUDIO
+  </h2>
+
+  <!-- Tabs -->
+  <div class="flex justify-center mb-20">
+    <div class="inline-flex rounded-lg overflow-hidden border">
+      <TabButton id="tab-photos" dataTab="photos" isActive={true}>
+        PHOTOS
+      </TabButton>
+      <TabButton id="tab-videos" dataTab="videos" isActive={false}>
+        VIDEOS
+      </TabButton>
+    </div>
+  </div>
+
+  <!-- Media Grids -->
+  <div id="gallery-wrap" class="space-y-6">
+    <MediaGrid id="photos-grid" items={PHOTOS} type="image" isVisible={true} />
+    <MediaGrid id="videos-grid" items={VIDEOS} type="video" isVisible={false} />
+  </div>
+
+  <!-- Modal -->
+  <Modal />
+</section>
+
+<script>
+  import { initGallery } from "../scripts/gallery.js";
+  initGallery();
+</script>
+
+<style>
+  @view-transition {
+    navigation: auto;
+  }
+
+  /* View Transitions para el modal */
+  .modal-enter {
+    view-transition-name: modal-backdrop;
+  }
+
+  .modal-media {
+    view-transition-name: modal-content;
+  }
+</style>

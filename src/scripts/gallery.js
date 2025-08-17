@@ -1,4 +1,3 @@
-// src/scripts/gallery.js
 export function initGallery() {
   // DOM Elements
   const elements = {
@@ -43,9 +42,9 @@ export function initGallery() {
 
   function updateTabButton(button, isActive) {
     if (isActive) {
-      button.className = "px-20 py-6 font-neue-kaine text-md font-bold transition-all duration-200 ease-in-out bg-gray-900 text-white";
+      button.className = "px-18 py-4 font-neue-kaine text-md font-bold transition-all duration-200 ease-in-out bg-gray-900 text-white";
     } else {
-      button.className = "px-20 py-6 font-neue-kaine text-md font-bold transition-all duration-200 ease-in-out bg-white text-gray-900 hover:bg-gray-50";
+      button.className = "px-18 py-4 font-neue-kaine text-md font-bold transition-all duration-200 ease-in-out bg-white text-gray-900 hover:bg-gray-50";
     }
   }
 

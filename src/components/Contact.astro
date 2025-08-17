@@ -1,0 +1,135 @@
+<section
+  id="contact-section"
+  class="relative mt-30 w-full h-[850px] md:h-[700px] lg:h-[850px] rounded-4xl overflow-hidden container-default font-neue-kaine"
+  role="region"
+  aria-labelledby="contact-heading"
+>
+  <!-- Background Image -->
+  <div
+    id="contact-bg"
+    class="absolute inset-0 bg-cover bg-center bg-no-repeat rounded-4xl overflow-hidden"
+    style="background-image: url('/images/house-2.jpg')"
+    aria-hidden="true"
+  >
+    <!-- Elegant Opacity Mask -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent"
+    >
+    </div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="relative z-10 flex flex-col lg:flex-row h-full">
+    <!-- Text Content - Left Side -->
+    <div
+      class="contact-left flex-1 p-6 md:p-12 lg:p-32 flex flex-col justify-center font-neue-kaine"
+    >
+      <header>
+        <!-- Usamos h2 para buena semántica (header principal del sitio fuera de este componente) -->
+        <h2
+          id="contact-heading"
+          class="contact-title font-semibold text-3xl md:text-4xl lg:text-5xl text-white leading-tight"
+        >
+          DO YOU HAVE ANY <br /> QUESTIONS?
+        </h2>
+      </header>
+
+      <div class="mt-6 lg:mt-8">
+        <p
+          class="contact-desc font-semibold text-lg md:text-xl text-white/90 leading-relaxed"
+        >
+          Enter your details and we will contact
+          <br class="hidden md:block" />you, or call us at the number below
+        </p>
+      </div>
+
+      <div class="mt-10 lg:mt-14">
+        <a
+          href="tel:+527721656516"
+          class="contact-phone inline-block text-3xl md:text-4xl lg:text-5xl font-bold text-white hover:text-amber-200 transition-transform duration-200"
+          aria-label="Call us at (+52) 772-165-6516"
+        >
+          (+52) 772-165-6516
+        </a>
+      </div>
+
+      <footer class="mt-auto pt-8 lg:pt-16">
+        <p
+          class="contact-list font-bold text-lg md:text-xl text-white/80 leading-relaxed"
+        >
+          DESIGNING <br />
+          PROJECT DESIGN <br />
+          CONSTRUCTION <br />
+          FINAL RENOVATION
+        </p>
+      </footer>
+    </div>
+
+    <!-- Contact Form Container - Right Side -->
+    <div
+      class="contact-right flex-1 p-6 md:p-12 lg:p-16 flex items-center justify-center"
+    >
+      <div class="w-full max-w-md">
+        <!-- Accessible form -->
+        <form
+          id="contact-form"
+          class="contact-form bg-white rounded-4xl p-8 h-[auto] shadow-2xl transition-all duration-500"
+        >
+          <div class="text-center text-black">
+            <p class="contact-form-title text-3xl font-bold">HOUSE MOON</p>
+            <p class="contact-form-sub text-2xl mt-6 font-semibold">
+              Enter your details and <br /> manager will call you back
+            </p>
+
+            <div class="mt-8 space-y-3">
+              <label class="sr-only" for="name">Your name</label>
+              <input
+                id="name"
+                name="name"
+                class="contact-field block bg-gray-200 w-full rounded-xl p-4 focus:bg-gray-100 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                type="text"
+                placeholder="Your Name"
+                autocomplete="name"
+                required
+              />
+
+              <label class="sr-only" for="phone">Phone</label>
+              <input
+                id="phone"
+                name="phone"
+                class="contact-field block bg-gray-200 w-full rounded-xl p-4 focus:bg-gray-100 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                type="tel"
+                placeholder="+52 (099) 999-88-99"
+                aria-label="Your Phone Number"
+                autocomplete="tel"
+                required
+              />
+
+              <label class="sr-only" for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                class="contact-field block bg-gray-200 w-full rounded-xl p-4 h-28 resize-none focus:bg-gray-100 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                placeholder="Message (optional)"
+                autocomplete="off"></textarea>
+
+              <button
+                type="submit"
+                class="contact-button cursor-pointer font-semibold bg-black w-full p-4 rounded-xl text-white transition-transform duration-200 hover:bg-gray-800 active:scale-95"
+              >
+                SEND
+              </button>
+
+              <a
+                href="/privacy"
+                class="contact-privacy flex justify-center text-black underline text-xs font-bold mt-4"
+              >
+                Privacy Policy
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

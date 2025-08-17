@@ -1,6 +1,7 @@
 ---
 const title = "House Sheller";
 import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 ---
 
@@ -18,5 +19,13 @@ import "../styles/global.css";
       <Navbar />
     </main>
     <slot />
+    <Footer />
+    <script>
+      import { initAnimations } from "../scripts/animations.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initAnimations();
+      });
+    </script>
   </body>
 </html>

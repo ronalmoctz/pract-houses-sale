@@ -1,0 +1,63 @@
+---
+import { navLinks, SOCIAL } from "../constants";
+---
+
+<footer class="bg-dark mt-30 w-full lg:h-64 h-full text-white font-neue-kaine">
+  <div class="container-default pt-16 pb-6">
+    <!-- Grid de 3 columnas -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-0 items-start">
+      <!-- Primera columna - Logo y texto -->
+      <div class="text-center lg:text-left">
+        <h3 class="text-2xl font-bold">MOON HOUSE</h3>
+        <p class="mt-12 text-sm text-white/70">
+          Your trusted partner in <br />finding your dream home.
+        </p>
+      </div>
+
+      <!-- Segunda columna - Navigation Links (centrada) -->
+      <div class="flex justify-center text-white">
+        <ul class="flex flex-col lg:flex-row lg:gap-20 gap-4">
+          {
+            navLinks.map(({ id, title }) => (
+              <li>
+                <a
+                  href={id}
+                  class="hover:text-amber-200 transition-colors duration-200"
+                >
+                  {title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Tercera columna - Social y texto -->
+      <div class="text-center lg:text-right">
+        <ul class="flex justify-center lg:justify-end gap-4 mb-4">
+          {
+            SOCIAL.map(({ url, image, name, label }) => (
+              <li>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label ?? name}
+                  class="hover:opacity-80 transition-opacity duration-200"
+                >
+                  <image.logo />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="text-sm mt-12 text-white/70" id="footerCopyright"></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("footerCopyright").textContent =
+    `© ${new Date().getFullYear()} Homes Moon Realty. All rights reserved.`;
+</script>

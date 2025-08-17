@@ -37,6 +37,7 @@ body {
 
 
 @layer components {
+
     main {
         @apply w-full overflow-x-hidden;
     }
@@ -45,26 +46,114 @@ body {
         @apply container mx-auto px-5 lg:px-0;
     }
 
-    nav {
-        @apply fixed z-50 w-full transition-all;
-
-        div {
-            @apply flex md:flex-row flex-col md:justify-between items-center gap-5 py-5 lg:px-0 px-5 container mx-auto;
-        }
-
-        p {
-            @apply font-sans text-3xl -mb-2;
-        }
-
-        a {
-            @apply cursor-pointer text-nowrap md:text-base text-sm;
-        }
-
-        ul {
-            @apply flex-center lg:gap-30 gap-7;
-        }
+    /* NAVBAR wrapper (full-width) */
+    .navbar {
+        @apply fixed top-0 left-0 w-full z-50 transition-colors duration-300 ease-out;
+        color: theme('colors.gray.100');
+        pointer-events: cursor;
     }
 
+
+    /* The `.nav-inner` class is defining the styling for a container element within the navbar. Here's
+    what each part of the code is doing: */
+    .nav-inner {
+        @apply py-5 flex items-center justify-between gap-5;
+    }
+
+    /* Estado scrolled: background minimalista, blur, menos padding */
+    .navbar-scrolled {
+        /* fondo que cubre todo y aspecto minimalista */
+        background-color: rgba(243, 244, 246, 0.85);
+        /* gray-100 ~ tailwind gray-100 */
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        box-shadow: 0 6px 20px rgba(31, 41, 55, 0.06);
+    }
+
+    /* Ajuste interno cuando la navbar está scrolleada (reduce padding para que parezca más delgada) */
+    .navbar-scrolled .nav-inner {
+        @apply py-2;
+    }
+
+    /* Brand */
+    .brand p {
+        @apply font-sans text-2xl text-current;
+        margin: 0;
+    }
+
+    /* Links layout */
+    .nav-links {
+        @apply flex items-center gap-6;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-link {
+        @apply text-sm font-medium text-current px-3 py-2 rounded-full transition-all duration-200;
+        background: transparent;
+        border-radius: 30px%;
+    }
+
+    /* Hover: sutil */
+    .nav-link:hover {
+        @apply bg-gray-200/60 text-black;
+    }
+
+    /* Active: píldora blanca con texto negro */
+    .nav-link.active {
+        @apply bg-white text-black shadow-sm;
+        box-shadow: 0 4px 14px rgba(2, 6, 23, 0.08);
+        transform: translateZ(0);
+    }
+
+    /* Social icons */
+    .nav-social {
+        @apply flex items-center gap-9;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-icon {
+        @apply flex items-center justify-center p-1 rounded-md transition-opacity duration-150;
+        opacity: 0.95;
+    }
+
+    .nav-icon:hover {
+        @apply opacity-100;
+    }
+
+    /* Phone */
+    .nav-phone a {
+        @apply px-3 py-1 rounded-full bg-transparent text-current transition-colors duration-200;
+    }
+
+    .navbar-scrolled .nav-phone a {
+        @apply bg-transparent text-current;
+        /* stays neutral, but you can change to subtle contrast */
+    }
+
+    /* Ensure colors update when navbar becomes scrolled: set base color to gray-700 for legibility */
+    .navbar-scrolled {
+        color: theme('colors.gray.800');
+    }
+
+    .navbar-scrolled .nav-link {
+        color: theme('colors.gray.800');
+    }
+
+    .navbar-scrolled .brand p {
+        color: theme('colors.gray.800');
+    }
+
+    .navbar-scrolled .nav-phone a {
+        color: theme('colors.gray.800');
+    }
+
+    .navbar-scrolled .nav-icon {
+        color: theme('colors.gray.800');
+    }
 }
 
 

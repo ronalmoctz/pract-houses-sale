@@ -1,25 +1,5 @@
-# Astro Starter Kit: Basics
 
-```sh
-pnpm create astro@latest -- --template basics
-```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-# Landing page - Proyecto de Portfolio: House Landing
-
->.[NOTE] Este proyecto está desplegado en Vercel y forma parte del portafolio personal. El foco principal es demostrar animaciones avanzadas con GSAP dentro de una web estática construida con Astro y Tailwind.
+>.[NOTE]. Este proyecto está desplegado en Vercel y forma parte del portafolio personal. El foco principal es demostrar animaciones avanzadas con GSAP dentro de una web estática construida con Astro y Tailwind.
 
 ## Badges
 
@@ -28,7 +8,7 @@ Inside of your Astro project, you'll see the following folders and files:
 ![GSAP](https://img.shields.io/badge/GSAP-3.x-brightgreen)
 ![Sharp](https://img.shields.io/badge/sharp-image-processing-orange)
 
->.[NOTE] Versiones aproximadas basadas en `package.json`.
+>.[NOTE]. Versiones aproximadas basadas en `package.json`.
 
 ## Vista previa (deploy)
 
@@ -62,7 +42,7 @@ flowchart TD
 	style G fill:#def,stroke:#333,stroke-width:1px
 ```
 
->.[NOTE] El diagrama muestra el flujo desde contenido y componentes hasta el deploy en Vercel y destaca la ubicación de las animaciones GSAP (carpeta `src/scripts`).
+>.[NOTE]. El diagrama muestra el flujo desde contenido y componentes hasta el deploy en Vercel y destaca la ubicación de las animaciones GSAP (carpeta `src/scripts`).
 
 ## Estructura relevante del proyecto
 
@@ -91,7 +71,7 @@ flowchart TD
 
 ## Notas finales
 
->.[NOTE] Este proyecto está pensado para exhibir habilidades en animación (GSAP) y en composición moderna con Astro y Tailwind; el resultado está en producción en Vercel. Para ver el comportamiento interactivo revisa `src/scripts/animations.js` y `src/scripts/gallery.js`.
+>.[NOTE]. Este proyecto está pensado para exhibir habilidades en animación (GSAP) y en composición moderna con Astro y Tailwind; el resultado está en producción en Vercel. Para ver el comportamiento interactivo revisa `src/scripts/animations.js` y `src/scripts/gallery.js`.
 
 ---
 

@@ -71,7 +71,7 @@ import { navLinks, SOCIAL } from "../constants/index";
   // Use IntersectionObserver to mark active section (better perf)
   const observerOptions = {
     root: null,
-    rootMargin: "-40% 0px -50% 0px", // center detection
+    rootMargin: "-40% 0px -50% 0px",
     threshold: 0,
   };
 
@@ -89,7 +89,6 @@ import { navLinks, SOCIAL } from "../constants/index";
 
   sections.forEach((section) => io.observe(section));
 
-  // Smooth scroll + set active on click immediately (optimistic UI)
   links.forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();

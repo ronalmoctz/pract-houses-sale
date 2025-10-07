@@ -7,25 +7,83 @@ import ArrowUpRight from "../assets/arrow-up-right.svg";
 <section id="hero" class="relative min-h-dvh w-full overflow-hidden">
   <Image
     src={HauseHero}
-    alt="Casa Moon"
-    class="absolute inset-0 w-full object-cover object-center block z-0"
+    alt="Casa moderna Amber House - Construcción y diseño de casas contemporáneas en México"
+    class="absolute inset-0 w-full h-full object-cover object-center block z-0"
+    loading="eager"
+    fetchpriority="high"
   />
-  <div class="container-default text-gray-100">
-    <h1 class="absolute top-[8%] left-[8%] font-medium title">AMBER</h1>
-    <h1 class="absolute top-[28%] right-[4.5%] font-medium title">HOUSE</h1>
+  
+  <!-- VERSIÓN DESKTOP - Oculta en mobile -->
+  <div class="hidden sm:block container-default text-gray-100">
+    <!-- AMBER -->
+    <h1
+      class="absolute top-[8%] left-[8%] font-medium text-6xl md:text-7xl lg:text-8xl title text-left"
+    >
+      AMBER
+    </h1>
 
-    <p class="font-light text-3xl top-[14%] right-[6%] subtitle">
+    <!-- HOUSE -->
+    <h1
+      class="absolute top-[28%] right-[4.5%] font-medium text-6xl md:text-7xl lg:text-8xl title text-right"
+    >
+      HOUSE
+    </h1>
+
+    <!-- WE BUILD subtitle -->
+    <p
+      class="absolute font-light text-2xl md:text-3xl top-[14%] right-[6%] subtitle text-left"
+    >
       WE BUILD <br /> MODERN <br /> HOUSES IN <br /> MEXICO
     </p>
-    <p class="font-medium text-xl top-[50%] left-[40%] text-right subtitle">
-      DESING <br /> PROJECT DESING <br /> CONSTRUCTION <br /> FINAL RENOVATION
+
+    <!-- Services list -->
+    <p
+      class="absolute font-medium text-lg md:text-xl top-[50%] left-[40%] text-right subtitle"
+    >
+      DESIGN <br /> PROJECT DESIGN <br /> CONSTRUCTION <br /> FINAL RENOVATION
     </p>
+
+    <!-- CTA Button -->
     <a
-      class="absolute inline-flex items-center gap-2 text-2xl top-[58.3%] left-[8%]"
-      href="#"
+      class="absolute inline-flex items-center gap-2 text-xl md:text-2xl top-[58.3%] left-[8%]"
+      href="#contacto"
+      aria-label="Solicitar presentación de proyectos"
     >
       <span class="underline subtitle">GET A PRESENTATION</span>
       <ArrowUpRight />
     </a>
+  </div>
+
+  <!-- VERSIÓN MOBILE - Oculta en desktop -->
+  <div class="block sm:hidden w-full h-full">
+    <div class="relative h-full flex flex-col justify-center items-center text-gray-100 px-6 py-20">
+      <!-- AMBER HOUSE - Título -->
+      <h1 class="font-medium text-5xl text-center title mb-6">
+        AMBER
+      </h1>
+      <h1 class="font-medium text-5xl text-center title mb-8">
+        HOUSE
+      </h1>
+
+      <!-- WE BUILD subtitle -->
+      <p class="font-light text-xl text-center subtitle mb-8">
+        WE BUILD <br /> MODERN <br /> HOUSES IN <br /> MEXICO
+      </p>
+
+      <!-- Services list -->
+      <p class="font-medium text-base text-center subtitle mb-10">
+        DESIGN <br /> PROJECT DESIGN <br /> CONSTRUCTION <br /> FINAL RENOVATION
+      </p>
+
+      <!-- CTA Button -->
+      <a
+        class="inline-flex items-center gap-2 text-lg subtitle"
+        href="#contacto"
+        aria-label="Solicitar presentación de proyectos"
+      >
+        <span class="underline">GET A PRESENTATION</span>
+        <ArrowUpRight class="size-4" />
+      </a>
+    </div>
   </div>
 </section>

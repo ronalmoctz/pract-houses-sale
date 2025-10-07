@@ -6,14 +6,74 @@ import MediaGrid from "./Grid.astro";
 import Modal from "./Modal.astro";
 ---
 
-<section class="pt-12 container-default bg-gray-200 rounded-4xl" id="gallery">
-  <h2 class="text-8xl text-center mb-20 mt-20 font-neue-kaine font-medium">
-    CASE STUDIO
-  </h2>
+<section 
+  class="pt-8 sm:pt-10 md:pt-12 container-default bg-gray-200 rounded-t-2xl sm:rounded-t-3xl md:rounded-4xl" 
+  id="gallery"
+  aria-labelledby="gallery-heading"
+>
+  <header class="text-center">
+    <h2 
+      id="gallery-heading"
+      class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-12 sm:mb-16 md:mb-20 mt-12 sm:mt-16 md:mt-20 font-neue-kaine font-medium"
+    >
+      CASE STUDIO
+    </h2>
+  </header>
 
   <!-- Tabs -->
-  <div class="flex justify-center mb-20">
-    <div class="inline-flex rounded-lg overflow-hidden border">
+  <nav 
+    class="flex justify-center mb-12 sm:mb-16 md:mb-20 px-4"
+    aria-label="Gallery navigation"
+  >
+    <!-- Mobile: Toggle Switch -->
+    <div class="md:hidden relative w-full max-w-xs">
+      <div class="bg-white rounded-full p-1 shadow-lg">
+        <div class="relative flex">
+          <input 
+            type="radio" 
+            name="gallery-tab" 
+            id="mobile-tab-photos" 
+            value="photos" 
+            checked 
+            class="sr-only peer/photos"
+          />
+          <input 
+            type="radio" 
+            name="gallery-tab" 
+            id="mobile-tab-videos" 
+            value="videos" 
+            class="sr-only peer/videos"
+          />
+          
+          <!-- Slider animado -->
+          <div 
+            id="mobile-slider"
+            class="absolute top-1 left-1 w-[calc(50%-0.25rem)] h-[calc(100%-0.5rem)] bg-gray-900 rounded-full transition-transform duration-300 ease-out"
+            aria-hidden="true"
+          ></div>
+          
+          <!-- Labels como botones -->
+          <label 
+            for="mobile-tab-photos"
+            class="relative z-10 flex-1 text-center py-3 font-neue-kaine font-bold text-sm cursor-pointer transition-colors duration-300 peer-checked/photos:text-white text-gray-900"
+          >
+            PHOTOS
+          </label>
+          <label 
+            for="mobile-tab-videos"
+            class="relative z-10 flex-1 text-center py-3 font-neue-kaine font-bold text-sm cursor-pointer transition-colors duration-300 peer-checked/videos:text-white text-gray-900"
+          >
+            VIDEOS
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop: Tabs tradicionales -->
+    <div 
+      class="hidden md:inline-flex rounded-lg overflow-hidden border border-gray-400"
+      role="tablist"
+    >
       <TabButton id="tab-photos" dataTab="photos" isActive={true}>
         PHOTOS
       </TabButton>
@@ -21,10 +81,10 @@ import Modal from "./Modal.astro";
         VIDEOS
       </TabButton>
     </div>
-  </div>
+  </nav>
 
   <!-- Media Grids -->
-  <div id="gallery-wrap" class="space-y-6">
+  <div id="gallery-wrap" class="space-y-2 sm:space-y-4 md:space-y-6">
     <MediaGrid id="photos-grid" items={PHOTOS} type="image" isVisible={true} />
     <MediaGrid id="videos-grid" items={VIDEOS} type="video" isVisible={false} />
   </div>
@@ -35,7 +95,44 @@ import Modal from "./Modal.astro";
 
 <script>
   import { initGallery } from "../scripts/gallery.js";
+  
+  // Inicializar galería
   initGallery();
+
+  // Manejar toggle mobile
+  const mobilePhotos = document.getElementById('mobile-tab-photos') as HTMLInputElement;
+  const mobileVideos = document.getElementById('mobile-tab-videos') as HTMLInputElement;
+  const mobileSlider = document.getElementById('mobile-slider');
+  const photosGrid = document.getElementById('photos-grid');
+  const videosGrid = document.getElementById('videos-grid');
+
+  function updateMobileTab(showPhotos: boolean) {
+    if (mobileSlider) {
+      mobileSlider.style.transform = showPhotos ? 'translateX(0)' : 'translateX(100%)';
+    }
+    
+    if (photosGrid && videosGrid) {
+      if (showPhotos) {
+        photosGrid.classList.remove('hidden');
+        photosGrid.classList.add('block');
+        videosGrid.classList.remove('block');
+        videosGrid.classList.add('hidden');
+      } else {
+        videosGrid.classList.remove('hidden');
+        videosGrid.classList.add('block');
+        photosGrid.classList.remove('block');
+        photosGrid.classList.add('hidden');
+      }
+    }
+  }
+
+  if (mobilePhotos) {
+    mobilePhotos.addEventListener('change', () => updateMobileTab(true));
+  }
+  
+  if (mobileVideos) {
+    mobileVideos.addEventListener('change', () => updateMobileTab(false));
+  }
 </script>
 
 <style>

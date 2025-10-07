@@ -4,46 +4,57 @@ import PlayButton from "../assets/play-icon.svg";
 ---
 
 <section class="py-30 container-default" id="house-plan">
-  <h1 class="font-neue-kaine text-8xl font-medium text-center">HOUSE PLAN</h1>
-
-  <div class="mt-22">
-    <h2 class="font-neue-kaine text-6xl font-medium text-left">
-      THE AREA IS 141M²
+  <header class="text-center">
+    <h2 class="font-neue-kaine text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium">
+      HOUSE PLAN
     </h2>
+  </header>
+
+  <div class="mt-16 sm:mt-20 lg:mt-22">
+    <h3 class="font-neue-kaine text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-left">
+      THE AREA IS 141M²
+    </h3>
   </div>
 
-  <div class="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-    <div class="order-1">
+  <div class="mt-12 sm:mt-14 lg:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
+    <!-- Lista de áreas -->
+    <div class="order-2 lg:order-1">
       {
         HOUSEAREA.map(({ areas }) => (
-          <div class="grid grid-cols-1 gap-y-6 font-neue-kaine">
+          <dl class="grid grid-cols-1 gap-y-4 sm:gap-y-6 font-neue-kaine">
             {areas.map(({ name, size }) => (
-              <div class="flex justify-between items-center py-4 px-6">
-                <span class="text-2xl font-semibold">{name}</span>
-                <span class="text-2xl font-semibold">{size}</span>
+              <div class="flex justify-between items-center py-3 sm:py-4 px-4 sm:px-6 border-b border-gray-200 last:border-b-0">
+                <dt class="text-lg sm:text-xl md:text-2xl font-semibold">{name}</dt>
+                <dd class="text-lg sm:text-xl md:text-2xl font-semibold">{size}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         ))
       }
     </div>
 
-    {/* Imagen del plano */}
-    <div class="order-2">
+    <!-- Imagen del plano -->
+    <figure class="order-1 lg:order-2">
       <img
         src="/images/main-floor-marketing.PNG"
-        alt="plane-example"
-        class="w-full h-auto rounded-3xl"
+        alt="Plano arquitectónico del piso principal - Distribución de 141m²"
+        class="w-full h-auto rounded-2xl sm:rounded-3xl"
+        loading="lazy"
       />
-    </div>
+    </figure>
   </div>
-  <div class="flex-center">
+
+  <!-- CTA Button -->
+  <div class="flex-center mt-12 sm:mt-14 lg:mt-16">
     <a
-      href=""
-      class="mt-12 flex items-center justify-center border-2 border-black w-[450px] px-8 py-6 rounded-xl revelation"
+      href="#projects"
+      class="flex items-center justify-center border-2 border-black w-full sm:w-auto sm:min-w-[400px] lg:w-[450px] px-6 sm:px-8 py-5 sm:py-6 rounded-xl hover:bg-black hover:text-white transition-colors duration-300 revelation"
+      aria-label="Ver todos los proyectos de casas"
     >
-      <PlayButton class="size-8" />
-      <span class="px-5 font-normal text-xl">VIEW ALL PROJECTS</span>
+      <PlayButton class="size-6 sm:size-7 md:size-8 flex-shrink-0" aria-hidden="true" />
+      <span class="px-4 sm:px-5 font-normal text-base sm:text-lg md:text-xl whitespace-nowrap">
+        VIEW ALL PROJECTS
+      </span>
     </a>
   </div>
 </section>

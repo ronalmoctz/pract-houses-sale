@@ -8,6 +8,7 @@ import { navLinks, SOCIAL } from "../constants/index";
       <p>MOON HOUSE</p>
     </a>
 
+    <!-- Desktop Navigation -->
     <ul class="nav-links">
       {
         navLinks.map((link) => (
@@ -41,6 +42,59 @@ import { navLinks, SOCIAL } from "../constants/index";
     <div class="nav-phone text-sm font-semibold whitespace-nowrap">
       <a href="tel:+521234567890">+52 123 456 7890</a>
     </div>
+
+    <!-- Mobile Menu Button -->
+    <button 
+      id="mobile-menu-btn" 
+      class="mobile-menu-btn" 
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-content">
+      <ul class="mobile-nav-links">
+        {
+          navLinks.map((link) => (
+            <li key={link.id}>
+              <a href={`#${link.id}`} data-section={link.id} class="mobile-nav-link">
+                {link.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mobile-nav-footer">
+        <ul class="mobile-nav-social">
+          {
+            SOCIAL.map(({ url, image, name, label }) => (
+              <li key={name}>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label ?? name}
+                  class="mobile-nav-icon"
+                >
+                  <image.logo />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        
+        <div class="mobile-nav-phone">
+          <a href="tel:+521234567890">+52 123 456 7890</a>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -50,6 +104,12 @@ import { navLinks, SOCIAL } from "../constants/index";
   const navInner = document.querySelector(".nav-inner");
   const links = document.querySelectorAll(".nav-link");
   const sections = document.querySelectorAll("section[id]");
+
+  // Mobile menu elements
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileLinks = document.querySelectorAll(".mobile-nav-link");
+  let isMenuOpen = false;
 
   // Throttle the scroll toggle using rAF
   let ticking = false;
@@ -68,6 +128,44 @@ import { navLinks, SOCIAL } from "../constants/index";
   }
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  // Mobile menu toggle
+  function toggleMobileMenu() {
+    isMenuOpen = !isMenuOpen;
+    mobileMenu.classList.toggle("menu-open", isMenuOpen);
+    mobileMenuBtn.classList.toggle("menu-open", isMenuOpen);
+    mobileMenuBtn.setAttribute("aria-expanded", String(isMenuOpen));
+    mobileMenu.setAttribute("aria-hidden", String(!isMenuOpen));
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+  }
+
+  mobileMenuBtn.addEventListener("click", toggleMobileMenu);
+
+  // Close menu when clicking on a link
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const id = link.getAttribute("href").slice(1);
+      const el = document.getElementById(id);
+      
+      // Close menu first
+      toggleMobileMenu();
+      
+      // Then scroll to section
+      setTimeout(() => {
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 300);
+      
+      // Update active state
+      mobileLinks.forEach((l) => l.classList.remove("active"));
+      links.forEach((l) => l.classList.remove("active"));
+      link.classList.add("active");
+      const desktopLink = document.querySelector(`.nav-link[data-section="${id}"]`);
+      if (desktopLink) desktopLink.classList.add("active");
+    });
+  });
+
   // Use IntersectionObserver to mark active section (better perf)
   const observerOptions = {
     root: null,
@@ -79,10 +177,13 @@ import { navLinks, SOCIAL } from "../constants/index";
     entries.forEach((entry) => {
       const id = entry.target.getAttribute("id");
       const link = document.querySelector(`.nav-link[data-section="${id}"]`);
+      const mobileLink = document.querySelector(`.mobile-nav-link[data-section="${id}"]`);
       if (entry.isIntersecting) {
         // remove on others then set active
         links.forEach((l) => l.classList.remove("active"));
+        mobileLinks.forEach((l) => l.classList.remove("active"));
         if (link) link.classList.add("active");
+        if (mobileLink) mobileLink.classList.add("active");
       }
     });
   }, observerOptions);
@@ -98,7 +199,10 @@ import { navLinks, SOCIAL } from "../constants/index";
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
       links.forEach((l) => l.classList.remove("active"));
+      mobileLinks.forEach((l) => l.classList.remove("active"));
       link.classList.add("active");
+      const mobileLink = document.querySelector(`.mobile-nav-link[data-section="${id}"]`);
+      if (mobileLink) mobileLink.classList.add("active");
     });
   });
 </script>

@@ -1,34 +1,50 @@
 ---
+
 import PlayButton from "../assets/play-icon.svg";
 ---
+<section id="video" aria-labelledby="video-title" class="mt-28 container-default">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center">
+    <!-- IMAGEN: usa Astro Image si está disponible para srcset automático -->
+    <figure class="w-full">
+      <div class="w-full rounded-4xl overflow-hidden shadow-lg h-64 sm:h-80 md:h-[520px] lg:h-[650px]">
+        <img
+          src="/images/house-4.jpg"
+          alt="Fachada e interiores de Amber House mostrando acabados modernos y alta calidad"
+          class="w-full h-full object-cover block"
+          loading="lazy"
+          width="1600"
+          height="900"
+        />
+      </div>
+      <!-- figcaption solo visible para screen-readers (mejora semántica/SEO) -->
+      <figcaption class="sr-only">Fotografía: experiencia de construcción Amber House</figcaption>
+    </figure>
 
-<section class="mt-28 container-default" id="video">
-  <div class="grid grid-cols-2 gap-120 items-center">
-    <div class="h-[750px] w-[800px] rounded-4xl overflow-hidden">
-      <img
-        src="/images/house-4.jpg"
-        alt="house-experience"
-        class="w-full h-full object-cover"
-      />
-    </div>
-
-    <div class="w-full">
-      <h2 class="text-pretty">
-        "We build modern <br /> and high-quality <br /> houses in Mexico."
+    <!-- TEXTO + CTA -->
+    <div>
+      <!-- H2 ligado al section para SEO y accesibilidad -->
+      <h2 id="video-title" class="text-pretty text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
+        "We build modern <br class="hidden sm:inline" /> and high-quality <br class="hidden sm:inline" /> houses in Mexico."
       </h2>
-      <div class="mt-12">
+
+      <div class="mt-6 text-gray-800">
         <p class="font-medium">- Olexander Oleshko</p>
-        <div class="inline-flex gap-2">
-          <p class="font-extralight">Founder of</p>
-          <p class="font-medium">Amber House</p>
+        <div class="inline-flex gap-2 items-baseline">
+          <p class="font-extralight text-sm md:text-base">Founder of</p>
+          <p class="font-medium text-sm md:text-base">Amber House</p>
         </div>
       </div>
+
+      <!-- CTA: usa role=button si abre modal; aria-label descriptivo; estilos responsive -->
       <a
-        href=""
-        class="mt-12 flex items-center justify-center border-2 border-black w-90 px-8 py-6 rounded-xl revelation"
+        href="#"
+        role="button"
+        aria-label="Reproducir video corporativo Amber House"
+        class="mt-8 inline-flex items-center gap-3 border-2 border-black px-6 py-3 rounded-xl revelation focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500"
       >
-        <PlayButton class="size-8" />
-        <span class="px-5 font-normal text-xl">WATCH THE VIDEO</span>
+        <!-- Icono accesible: aria-hidden para que el texto sea lo leído -->
+        <PlayButton class="w-6 h-6 md:w-8 md:h-8" aria-hidden="true" />
+        <span class="font-normal text-base md:text-lg whitespace-nowrap">WATCH THE VIDEO</span>
       </a>
     </div>
   </div>

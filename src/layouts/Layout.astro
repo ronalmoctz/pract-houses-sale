@@ -1,6 +1,4 @@
 ---
-const description =
-  "Landing page de demostración de viviendas. Animaciones con GSAP, optimización de imágenes con Sharp y diseño con Tailwind + Astro.";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
@@ -12,53 +10,133 @@ import "../styles/global.css";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/webp" href="/sketch.webp" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1f2937" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Amber House" />
 
     <!-- Primary metadata -->
-    <title>House Sheller</title>
+    <title>Amber House - Construcción de Casas Modernas en México</title>
     <meta
       name="description"
-      content="Landing page de demostración de viviendas. Animaciones con GSAP, optimización de imágenes con Sharp y diseño con Tailwind + Astro."
+      content="Amber House construye casas modernas y contemporáneas en México. Especialistas en diseño, construcción y renovación de viviendas de alta calidad. ¡Solicita tu presentación personalizada!"
     />
     <meta
       name="keywords"
-      content="inmobiliaria, landing, GSAP, Astro, Tailwind, casas, gallery"
+      content="casas modernas México, construcción de casas, diseño arquitectónico, viviendas contemporáneas, renovación de casas, arquitectura moderna, construcción residencial, casas de lujo, proyectos inmobiliarios, Amber House"
     />
+    <meta name="author" content="Amber House" />
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://house-landing-page-cyan.vercel.app" />
 
     <!-- Open Graph / Facebook, WhatsApp, etc. -->
-    <meta property="og:title" content="House Sheller" />
+    <meta
+      property="og:title"
+      content="Amber House - Construcción de Casas Modernas en México"
+    />
     <meta
       property="og:description"
-      content="Landing page de demostración de viviendas. Animaciones con GSAP, optimización de imágenes con Sharp y diseño con Tailwind + Astro."
+      content="Amber House construye casas modernas y contemporáneas en México. Especialistas en diseño, construcción y renovación de viviendas de alta calidad. ¡Solicita tu presentación personalizada!"
     />
     <meta
       property="og:image"
-      content="https://house-landing-page-cyan.vercel.app/images/banner.jpg"
+      content="https://house-landing-page-cyan.vercel.app/banner.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Casa moderna Amber House - Construcción y diseño de casas contemporáneas en México"
     />
     <meta
       property="og:url"
       content="https://house-landing-page-cyan.vercel.app"
     />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Amber House" />
+    <meta property="og:locale" content="es_MX" />
 
     <!-- Twitter / X -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="House Sheller" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Amber House - Construcción de Casas Modernas en México"
+    />
     <meta
       name="twitter:description"
-      content="Landing page de demostración de viviendas. Animaciones con GSAP, optimización de imágenes con Sharp y diseño con Tailwind + Astro."
+      content="Amber House construye casas modernas y contemporáneas en México. Especialistas en diseño, construcción y renovación de viviendas de alta calidad."
     />
     <meta
       name="twitter:image"
-      content="https://house-landing-page-cyan.vercel.app/images/banner.jpg"
+      content="https://house-landing-page-cyan.vercel.app/banner.jpg"
     />
-
-    <!-- Robots -->
-    <meta name="robots" content="index, follow" />
+    <meta
+      name="twitter:image:alt"
+      content="Casa moderna Amber House - Construcción y diseño de casas contemporáneas en México"
+    />
 
     <!-- Analytics: loader will be injected only after consent -->
     <script type="text/plain" data-cookiecategory="analytics">
       /* placeholder for gtag - will be injected dynamically after consent */
+    </script>
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Amber House",
+        "description": "Amber House construye casas modernas y contemporáneas en México. Especialistas en diseño, construcción y renovación de viviendas de alta calidad.",
+        "url": "https://house-landing-page-cyan.vercel.app",
+        "logo": "https://house-landing-page-cyan.vercel.app/sketch.webp",
+        "image": "https://house-landing-page-cyan.vercel.app/banner.jpg",
+        "telephone": "+52 123 456 7890",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "MX",
+          "addressRegion": "México"
+        },
+        "sameAs": [
+          "https://www.facebook.com/amberhouse",
+          "https://www.instagram.com/amberhouse",
+          "https://www.linkedin.com/company/amberhouse"
+        ],
+        "serviceArea": {
+          "@type": "Country",
+          "name": "México"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servicios de Construcción",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Diseño de Casas Modernas",
+                "description": "Diseño arquitectónico de casas contemporáneas"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Construcción de Viviendas",
+                "description": "Construcción de casas de alta calidad"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Renovación de Casas",
+                "description": "Renovación y remodelación de viviendas existentes"
+              }
+            }
+          ]
+        }
+      }
     </script>
   </head>
 
@@ -167,10 +245,35 @@ import "../styles/global.css";
 
     <!-- Cargar animaciones cliente correctamente como módulo -->
     <script>
-      import { initAnimations } from "../scripts/animations.js";
+      import {
+        initAnimations,
+        cleanupAnimations,
+      } from "../scripts/animations.js";
+
+      // Variable para controlar si ya se inicializaron las animaciones
+      let animationsLoaded = false;
 
       document.addEventListener("DOMContentLoaded", () => {
-        initAnimations();
+        if (!animationsLoaded) {
+          initAnimations();
+          animationsLoaded = true;
+        }
+      });
+
+      // Cleanup al salir de la página (para SPA o navegación)
+      window.addEventListener("beforeunload", () => {
+        cleanupAnimations();
+      });
+
+      // Cleanup cuando se oculta la página
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          // Pausar animaciones cuando la página no es visible
+          gsap.globalTimeline.pause();
+        } else {
+          // Reanudar animaciones cuando la página vuelve a ser visible
+          gsap.globalTimeline.resume();
+        }
       });
     </script>
   </body>

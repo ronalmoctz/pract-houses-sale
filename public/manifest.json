@@ -1,0 +1,16 @@
+{
+    "name": "Amber House - Construcción de Casas Modernas",
+    "short_name": "Amber House",
+    "description": "Amber House construye casas modernas y contemporáneas en México. Especialistas en diseño, construcción y renovación de viviendas de alta calidad.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#1f2937",
+    "icons": [
+        {
+            "src": "/sketch.webp",
+            "sizes": "any",
+            "type": "image/webp"
+        }
+    ]
+}

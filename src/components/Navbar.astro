@@ -5,14 +5,14 @@ import { navLinks, SOCIAL } from "../constants/index";
 <nav id="navbar" class="navbar">
   <div class="nav-inner container-default">
     <a href="#home" class="brand">
-      <p>MOON HOUSE</p>
+      <p>AMBER HOUSE</p>
     </a>
 
     <!-- Desktop Navigation -->
     <ul class="nav-links">
       {
         navLinks.map((link) => (
-          <li key={link.id}>
+          <li>
             <a href={`#${link.id}`} data-section={link.id} class="nav-link">
               {link.title}
             </a>
@@ -24,7 +24,7 @@ import { navLinks, SOCIAL } from "../constants/index";
     <ul class="nav-social">
       {
         SOCIAL.map(({ url, image, name, label }) => (
-          <li key={name}>
+          <li>
             <a
               href={url}
               target="_blank"
@@ -44,9 +44,9 @@ import { navLinks, SOCIAL } from "../constants/index";
     </div>
 
     <!-- Mobile Menu Button -->
-    <button 
-      id="mobile-menu-btn" 
-      class="mobile-menu-btn" 
+    <button
+      id="mobile-menu-btn"
+      class="mobile-menu-btn"
       aria-label="Toggle menu"
       aria-expanded="false"
     >
@@ -62,8 +62,12 @@ import { navLinks, SOCIAL } from "../constants/index";
       <ul class="mobile-nav-links">
         {
           navLinks.map((link) => (
-            <li key={link.id}>
-              <a href={`#${link.id}`} data-section={link.id} class="mobile-nav-link">
+            <li>
+              <a
+                href={`#${link.id}`}
+                data-section={link.id}
+                class="mobile-nav-link"
+              >
                 {link.title}
               </a>
             </li>
@@ -75,7 +79,7 @@ import { navLinks, SOCIAL } from "../constants/index";
         <ul class="mobile-nav-social">
           {
             SOCIAL.map(({ url, image, name, label }) => (
-              <li key={name}>
+              <li>
                 <a
                   href={url}
                   target="_blank"
@@ -89,7 +93,7 @@ import { navLinks, SOCIAL } from "../constants/index";
             ))
           }
         </ul>
-        
+
         <div class="mobile-nav-phone">
           <a href="tel:+521234567890">+52 123 456 7890</a>
         </div>
@@ -146,22 +150,24 @@ import { navLinks, SOCIAL } from "../constants/index";
       e.preventDefault();
       const id = link.getAttribute("href").slice(1);
       const el = document.getElementById(id);
-      
+
       // Close menu first
       toggleMobileMenu();
-      
+
       // Then scroll to section
       setTimeout(() => {
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       }, 300);
-      
+
       // Update active state
       mobileLinks.forEach((l) => l.classList.remove("active"));
       links.forEach((l) => l.classList.remove("active"));
       link.classList.add("active");
-      const desktopLink = document.querySelector(`.nav-link[data-section="${id}"]`);
+      const desktopLink = document.querySelector(
+        `.nav-link[data-section="${id}"]`
+      );
       if (desktopLink) desktopLink.classList.add("active");
     });
   });
@@ -177,7 +183,9 @@ import { navLinks, SOCIAL } from "../constants/index";
     entries.forEach((entry) => {
       const id = entry.target.getAttribute("id");
       const link = document.querySelector(`.nav-link[data-section="${id}"]`);
-      const mobileLink = document.querySelector(`.mobile-nav-link[data-section="${id}"]`);
+      const mobileLink = document.querySelector(
+        `.mobile-nav-link[data-section="${id}"]`
+      );
       if (entry.isIntersecting) {
         // remove on others then set active
         links.forEach((l) => l.classList.remove("active"));
@@ -201,7 +209,9 @@ import { navLinks, SOCIAL } from "../constants/index";
       links.forEach((l) => l.classList.remove("active"));
       mobileLinks.forEach((l) => l.classList.remove("active"));
       link.classList.add("active");
-      const mobileLink = document.querySelector(`.mobile-nav-link[data-section="${id}"]`);
+      const mobileLink = document.querySelector(
+        `.mobile-nav-link[data-section="${id}"]`
+      );
       if (mobileLink) mobileLink.classList.add("active");
     });
   });

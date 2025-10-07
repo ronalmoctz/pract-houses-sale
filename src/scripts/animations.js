@@ -6,10 +6,32 @@ import { SplitText } from "gsap/all";
 // Registrar plugins
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+// Variables globales para control de animaciones
+let animationsInitialized = false;
+let scrollTriggers = [];
+
 // Función para inicializar todas las animaciones
 export function initAnimations() {
-  // Configuración global de GSAP
-  gsap.defaults({ ease: "power2.out", duration: 1.2 });
+  // Evitar reinicialización múltiple
+  if (animationsInitialized) {
+    console.warn('Animations already initialized, skipping...');
+    return;
+  }
+
+  // Configuración global de GSAP para mejor rendimiento
+  gsap.defaults({ 
+    ease: "power2.out", 
+    duration: 1.2,
+    force3D: true, // Forzar aceleración por hardware
+    lazy: false // Desactivar lazy loading para mejor control
+  });
+
+  // Configurar ScrollTrigger para mejor rendimiento
+  ScrollTrigger.config({
+    ignoreMobileResize: true,
+    syncRefresh: true,
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"
+  });
 
   // Hero Animations (sin ScrollTrigger - se ejecuta inmediatamente)
   initHeroAnimations();
@@ -20,6 +42,28 @@ export function initAnimations() {
   initHousePlanAnimations();
   initGalleryAnimations();
   initContactAnimations();
+
+  animationsInitialized = true;
+}
+
+// Función para limpiar animaciones
+export function cleanupAnimations() {
+  if (scrollTriggers.length > 0) {
+    scrollTriggers.forEach(trigger => {
+      if (trigger && trigger.kill) {
+        trigger.kill();
+      }
+    });
+    scrollTriggers = [];
+  }
+  
+  // Limpiar matchMedia si existe
+  if (window.__GSAP_CONTACT_MM) {
+    window.__GSAP_CONTACT_MM.revert();
+    window.__GSAP_CONTACT_MM = null;
+  }
+  
+  animationsInitialized = false;
 }
 
 // Hero - Animación inicial (sin scroll)
@@ -53,44 +97,46 @@ function initHeroAnimations() {
 
 // Video Section
 function initVideoAnimations() {
-  
-  gsap.from("#video img", {
-  y: 100, 
-  opacity: 0,
-  duration: 1.2,
-  ease: "power3.out",
-  scrollTrigger: {
-    trigger: "#video",
-    start: "top 80%",
-    end: "bottom 20%",
-    toggleActions: "play none none reverse",
-  }
+  const videoSection = document.querySelector("#video");
+  if (!videoSection) return;
+
+  // Crear timeline para video section
+  const videoTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#video",
+      start: "top 80%",
+      end: "bottom 20%",
+      toggleActions: "play none none none", // Solo play, sin reverse
+      once: true, // Solo se ejecuta una vez
+    }
   });
 
-  gsap.from("#video h2", {
+  // Agregar animaciones al timeline
+  videoTL.from("#video img", {
+    y: 100, 
+    opacity: 0,
+    duration: 1.2,
+    ease: "power3.out",
+  }, 0);
+
+  videoTL.from("#video h2", {
     y: 50,
     opacity: 0,
     duration: 1,
-    scrollTrigger: {
-      trigger: "#video h2",
-      start: "top 85%",
-      toggleActions: "play none none reverse",
-    }
-  });
+  }, 0.2);
 
-  gsap.from("#video p", {
+  videoTL.from("#video p", {
     y: 30,
     opacity: 0,
     duration: 1,
-    delay: 0.2,
-    scrollTrigger: {
-      trigger: "#video p",
-      start: "top 85%",
-      toggleActions: "play none none reverse",
-    }
-  });
-  gsap.utils.toArray(".revelation").forEach((el) => {
-    gsap.from(el, {
+  }, 0.4);
+
+  // Guardar trigger para cleanup
+  scrollTriggers.push(videoTL.scrollTrigger);
+
+  // Animaciones para elementos revelation
+  gsap.utils.toArray(".revelation").forEach((el, index) => {
+    const trigger = gsap.from(el, {
       y: 100, 
       opacity: 0,
       duration: 1.2,
@@ -98,18 +144,21 @@ function initVideoAnimations() {
       scrollTrigger: {
         trigger: el,
         start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse",
+        toggleActions: "play none none none",
+        once: true, // Solo se ejecuta una vez
       }
     });
+    scrollTriggers.push(trigger.scrollTrigger);
   });
-
 }
 
 // Technologies Section
 function initTechnologiesAnimations() {
-  // Imagen de fondo con parallax
-  gsap.to("#tecnologies img", {
+  const techSection = document.querySelector("#tecnologies");
+  if (!techSection) return;
+
+  // Imagen de fondo con parallax (sin reverse para evitar bucle)
+  const parallaxTrigger = gsap.to("#tecnologies img", {
     yPercent: -20,
     ease: "none",
     scrollTrigger: {
@@ -119,12 +168,13 @@ function initTechnologiesAnimations() {
       scrub: true,
     }
   });
+  scrollTriggers.push(parallaxTrigger.scrollTrigger);
 
   // Título con SplitText
   const techTitle = document.querySelector("#tecnologies h1");
   if (techTitle) {
     const titleSplit = new SplitText(techTitle, { type: "chars" });
-    gsap.from(titleSplit.chars, {
+    const titleTrigger = gsap.from(titleSplit.chars, {
       y: 100,
       opacity: 0,
       duration: 0.8,
@@ -132,13 +182,15 @@ function initTechnologiesAnimations() {
       scrollTrigger: {
         trigger: techTitle,
         start: "top 80%",
-        toggleActions: "play none none reverse",
+        toggleActions: "play none none none", // Sin reverse
+        once: true, // Solo una vez
       }
     });
+    scrollTriggers.push(titleTrigger.scrollTrigger);
   }
 
   // Cards de tecnologías
-  gsap.from("#tecnologies .relative", {
+  const cardsTrigger = gsap.from("#tecnologies .relative", {
     y: 80,
     opacity: 0,
     duration: 0.8,
@@ -146,100 +198,95 @@ function initTechnologiesAnimations() {
     scrollTrigger: {
       trigger: "#tecnologies .grid",
       start: "top 75%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play none none none", // Sin reverse
+      once: true, // Solo una vez
     }
   });
+  scrollTriggers.push(cardsTrigger.scrollTrigger);
 }
 
 // House Plan Section
 function initHousePlanAnimations() {
-  // Título principal
-  gsap.from("#house-plan h1", {
+  const housePlanSection = document.querySelector("#house-plan");
+  if (!housePlanSection) return;
+
+  // Crear timeline para house plan section
+  const housePlanTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#house-plan",
+      start: "top 80%",
+      toggleActions: "play none none none", // Sin reverse
+      once: true, // Solo una vez
+    }
+  });
+
+  // Agregar animaciones al timeline
+  housePlanTL.from("#house-plan h1", {
     scale: 0.8,
     opacity: 0,
     duration: 1.2,
-    scrollTrigger: {
-      trigger: "#house-plan h1",
-      start: "top 80%",
-      toggleActions: "play none none reverse",
-    }
-  });
+  }, 0);
 
-  // Subtítulo
-  gsap.from("#house-plan h2", {
+  housePlanTL.from("#house-plan h2", {
     x: -50,
     opacity: 0,
     duration: 1,
-    delay: 0.3,
-    scrollTrigger: {
-      trigger: "#house-plan h2",
-      start: "top 85%",
-      toggleActions: "play none none reverse",
-    }
-  });
+  }, 0.3);
 
-  // Imagen del plano
-  gsap.from("#house-plan img", {
+  housePlanTL.from("#house-plan img", {
     x: 100,
     opacity: 0,
     duration: 1.5,
-    scrollTrigger: {
-      trigger: "#house-plan img",
-      start: "top 80%",
-      toggleActions: "play none none reverse",
-    }
-  });
+  }, 0.2);
 
-  // Lista de áreas
-  gsap.from("#house-plan .flex.justify-between", {
+  housePlanTL.from("#house-plan .flex.justify-between", {
     x: -80,
     opacity: 0,
     duration: 0.6,
     stagger: 0.1,
-    scrollTrigger: {
-      trigger: "#house-plan .grid",
-      start: "top 80%",
-      toggleActions: "play none none reverse",
-    }
-  });
+  }, 0.5);
 
+  // Guardar trigger para cleanup
+  scrollTriggers.push(housePlanTL.scrollTrigger);
 }
 
 // Gallery Section
 function initGalleryAnimations() {
-  gsap.from("#gallery h2", {
+  const gallerySection = document.querySelector("#gallery");
+  if (!gallerySection) return;
+
+  // Crear timeline para gallery section
+  const galleryTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#gallery",
+      start: "top 80%",
+      toggleActions: "play none none none", // Sin reverse
+      once: true, // Solo una vez
+    }
+  });
+
+  // Agregar animaciones al timeline
+  galleryTL.from("#gallery h2", {
     scale: 0.9,
     opacity: 0,
     duration: 1,
-    scrollTrigger: {
-      trigger: "#gallery h2",
-      start: "top 80%",
-      toggleActions: "play none none reverse",
-    }
-  });
+  }, 0);
 
-  gsap.from("#gallery .inline-flex", {
+  galleryTL.from("#gallery .inline-flex", {
     y: 30,
     opacity: 0,
     duration: 0.8,
-    scrollTrigger: {
-      trigger: "#gallery .inline-flex",
-      start: "top 85%",
-      toggleActions: "play none none reverse",
-    }
-  });
+  }, 0.2);
 
-  gsap.from("#gallery .gallery-item", {
+  galleryTL.from("#gallery .gallery-item", {
     scale: 0.8,
     opacity: 0,
     duration: 0.8,
     stagger: 0.1,
-    scrollTrigger: {
-      trigger: "#gallery .grid",
-      start: "top 75%",
-      toggleActions: "play none none reverse",
-    }
-  });
+  }, 0.4);
+
+  // Guardar trigger para cleanup
+  scrollTriggers.push(galleryTL.scrollTrigger);
 }
 
 // Contact Section
@@ -277,7 +324,8 @@ function initContactAnimations() {
         scrollTrigger: {
           trigger: section,
           start: "top 82%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none", // Sin reverse para evitar bucle
+          once: true, // Solo una vez
         },
       });
 
@@ -347,6 +395,9 @@ function initContactAnimations() {
           );
         }
       }
+
+      // Guardar trigger para cleanup
+      scrollTriggers.push(tl.scrollTrigger);
 
       // return cleanup for matchMedia revert
       return () => {

@@ -17,29 +17,44 @@ import "../styles/global.css";
     <link rel="icon" type="image/webp" href="/sketch.webp" />
 
     <!-- Primary metadata -->
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>House Sheller</title>
+    <meta
+      name="description"
+      content="Landing page de demostración de viviendas. Animaciones con GSAP, optimización de imágenes con Sharp y diseño con Tailwind + Astro."
+    />
     <meta
       name="keywords"
       content="inmobiliaria, landing, GSAP, Astro, Tailwind, casas, gallery"
     />
-    <link rel="canonical" href={siteUrl} />
+    <link rel="canonical" href="https://house-landing-page-cyan.vercel.app" />
 
     <!-- Open Graph / Facebook, WhatsApp, etc. -->
+    <meta property="og:title" content="House Sheller" />
+    <meta
+      property="og:description"
+      content="Landing page de demostración de viviendas. Animaciones con GSAP, optimización de imágenes con Sharp y diseño con Tailwind + Astro."
+    />
+    <meta
+      property="og:image"
+      content="https://house-landing-page-cyan.vercel.app/images/banner.jpg"
+    />
+    <meta
+      property="og:url"
+      content="https://house-landing-page-cyan.vercel.app"
+    />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={siteUrl} />
-    <meta property="og:image" content={image} />
-    <meta property="og:site_name" content={title} />
 
     <!-- Twitter / X -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
-
-    <!-- Misc social -> WhatsApp uses OG tags; ensure image dimensions are OK (>= 600x315) -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="House Sheller" />
+    <meta
+      name="twitter:description"
+      content="Landing page de demostración de viviendas. Animaciones con GSAP, optimización de imágenes con Sharp y diseño con Tailwind + Astro."
+    />
+    <meta
+      name="twitter:image"
+      content="https://house-landing-page-cyan.vercel.app/images/banner.jpg"
+    />
 
     <!-- Robots -->
     <meta name="robots" content="index, follow" />

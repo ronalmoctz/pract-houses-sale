@@ -1,25 +1,159 @@
 ---
 const title = "House Sheller";
+const description =
+  "Landing page de demostración de viviendas. Animaciones con GSAP, optimización de imágenes con Sharp y diseño con Tailwind + Astro.";
+const siteUrl = "https://house-landing-page-cyan.vercel.app";
+const image = "/images/banner.jpg";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/webp" href="/sketch.webp" />
-    <meta name={title} content={Astro.generator} />
+
+    <!-- Primary metadata -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="inmobiliaria, landing, GSAP, Astro, Tailwind, casas, gallery"
+    />
+    <link rel="canonical" href={siteUrl} />
+
+    <!-- Open Graph / Facebook, WhatsApp, etc. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:image" content={image} />
+    <meta property="og:site_name" content={title} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Misc social -> WhatsApp uses OG tags; ensure image dimensions are OK (>= 600x315) -->
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Analytics: loader will be injected only after consent -->
+    <script type="text/plain" data-cookiecategory="analytics">
+      /* placeholder for gtag - will be injected dynamically after consent */
+    </script>
   </head>
+
   <body>
     <main>
       <Navbar />
     </main>
+
     <slot />
+
     <Footer />
+
+    <!-- Cookie consent banner (simple, local) -->
+    <div
+      id="cookie-consent"
+      class="fixed bottom-4 left-4 right-4 md:bottom-6 md:left-auto md:right-6 bg-white/95 shadow-lg rounded-lg p-4 flex items-center gap-3 z-50"
+      style="display:none"
+    >
+      <div class="flex-1 text-sm">
+        Este sitio usa cookies para analíticas (Google Analytics). ¿Deseas
+        habilitarlas?
+      </div>
+      <div class="flex gap-2">
+        <button
+          id="accept-cookies"
+          class="bg-blue-600 text-white px-3 py-1 rounded">Aceptar</button
+        >
+        <button
+          id="decline-cookies"
+          class="bg-gray-200 text-gray-800 px-3 py-1 rounded">Rechazar</button
+        >
+      </div>
+    </div>
+
+    <script type="module">
+      // Mostrar banner si no hay decisión previa
+      const CONSENT_KEY = "analytics_consent";
+      function showBanner() {
+        const el = document.getElementById("cookie-consent");
+        if (el) el.style.display = "flex";
+      }
+      function hideBanner() {
+        const el = document.getElementById("cookie-consent");
+        if (el) el.style.display = "none";
+      }
+
+      function setConsent(value) {
+        try {
+          localStorage.setItem(CONSENT_KEY, value ? "granted" : "denied");
+        } catch (e) {
+          // storage puede fallar en modo privado
+        }
+      }
+
+      function getConsent() {
+        try {
+          return localStorage.getItem(CONSENT_KEY);
+        } catch (e) {
+          return null;
+        }
+      }
+
+      async function loadGtag() {
+        if (window._gtag_loaded) return;
+        const id = "G-D271HWNMCQ";
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        window.gtag = window.gtag || gtag;
+        gtag("js", new Date());
+        gtag("config", id, { anonymize_ip: true });
+        window._gtag_loaded = true;
+      }
+
+      // Inicialización del banner y botones
+      document.addEventListener("DOMContentLoaded", () => {
+        const decision = getConsent();
+        if (decision === "granted") {
+          loadGtag();
+        } else if (decision === "denied") {
+          // no cargar analytics
+        } else {
+          // mostrar banner para elegir
+          showBanner();
+        }
+
+        const acceptBtn = document.getElementById("accept-cookies");
+        const declineBtn = document.getElementById("decline-cookies");
+        acceptBtn?.addEventListener("click", async () => {
+          setConsent(true);
+          hideBanner();
+          await loadGtag();
+        });
+        declineBtn?.addEventListener("click", () => {
+          setConsent(false);
+          hideBanner();
+        });
+      });
+    </script>
+
+    <!-- Cargar animaciones cliente correctamente como módulo -->
     <script>
       import { initAnimations } from "../scripts/animations.js";
 
